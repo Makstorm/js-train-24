@@ -8,6 +8,26 @@ function task2() {
   // Після 2 секунд викликаємо resolve з результатом проміса, який є рядком "Проміс 1 виконано"
   // Створюємо функцію promise2
   // Повертаємо новий проміс
+  function promise1() {
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve("Проміс 1 виконано");
+      }, 2000);
+    });
+  }
+
+  function promise2() {
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve("Проміс 1 виконано");
+      }, 5000);
+    });
+  }
+
+  Promise.race([promise1(), promise2()])
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err))
+    .finally(() => console.log("Завдання 2 завершено"));
   // Використовуємо setTimeout для імітації асинхронної операції, яка завершується через 5 секунди.
   // Після 5 секунд викликаємо resolve з результатом проміса, який є рядком "Проміс 2 виконано"
   // Використовуємо Promise.race для визначення, який проміс виконується першим.

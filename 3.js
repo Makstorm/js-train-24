@@ -6,6 +6,31 @@ function task3() {
   // Метод new Promise приймає в якості параметра функцію (executor), яка має два параметри: resolve і reject.
   // Використовуємо setTimeout для імітації асинхронної операції, яка завершується через 1 секунду
   // Викликаємо resolve з рядком 'Проміс 1 виконано', що означає успішне вирішення проміса
+  function promise1() {
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        resolve("Проміс 1 виконано");
+      }, 2000);
+    });
+  }
+
+  function promise2() {
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        reject("Проміс 2 ne виконано");
+      }, 2000);
+    });
+  }
+
+  Promise.allSettled([promise1(), promise2()])
+    .then((data) => {
+      data.forEach((el) => {
+        console.log(el.status);
+      });
+    })
+    .finally(() => {
+      console.log("Завдання 3 завершено");
+    });
   // Створюємо функцію promise2, яка створює і повертає новий проміс, який відхиляється
   // Використовуємо setTimeout для імітації асинхронної операції, яка не вдається і відхиляє проміс через 2 секунди
   // Викликаємо reject з рядком 'Проміс 2 відхилено', що означає відхилення проміса
